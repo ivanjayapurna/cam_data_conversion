@@ -208,14 +208,13 @@ media_path = 'sample_pi_media'
 media_name = 'sample_pi_camera_video'
 vid2research(media_path + '/' + media_name + '.mp4')
 
-# for image transformation testing
 '''
+# for image transformation testing
 media_name = 'RAW0029'
 image = cv2.imread(media_path + '/' + media_name + '.jpg')
-print('image shape', image.shape)
+#print('image shape', image.shape)
 img2research(image)
 '''
-
 
 
 

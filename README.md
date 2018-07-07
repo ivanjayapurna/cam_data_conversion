@@ -8,3 +8,5 @@ The image_utils.py file is a modified python script of the ufp package to be pyt
 
 TODO:
 - Connect to RPi camera on Donkey Car to convert and save live-captured video for future training purposes.
+
+https://docs.google.com/presentation/d/1hXQC8OLIvuCYonEwlCy9TCExW7WrS5Bjrg0a-a1qPoA/edit?usp=sharing
