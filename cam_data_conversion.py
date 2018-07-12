@@ -1,5 +1,5 @@
 # IMAGE TRANSFORM imports
-from numpy import tan, deg2rad, array
+from numpy import tan, deg2rad, array, ceil
 import matplotlib.pyplot as plt
 import cv2
 import PIL.Image
@@ -7,7 +7,7 @@ from PIL.Image import fromarray
 from image_utils import changeColorDepth
 # DONKEY CAR imports
 from donkeycar import Vehicle
-from donkeycar.parts.camera import PiCamera
+#from donkeycar.parts.camera import PiCamera
 from donkeycar.parts.datastore import Tub
 
 
@@ -129,7 +129,7 @@ def vid2research(input_media, initial_angle=160, final_angle=90, final_rows=224,
 	# calculating the expected output frame dimensions post research conversion
 	# assume images will always be landscape oriented or square
 	r = final_rows / frame_width
-	dim = (final_rows, int(frame_height * r))
+	dim = (final_rows, int(ceil(frame_height * r)))
 	frame_width, frame_height = dim[0], dim[1]
 
 	# Define the codec and create VideoWriter object. Store output to file.
@@ -158,12 +158,11 @@ def vid2research(input_media, initial_angle=160, final_angle=90, final_rows=224,
 	# when done, release video capture and write objects & close all frames
 	cap.release()
 	out.release()
-	cv2.destroyAllWindows()
+	cv2.destroyAllWindows()	
 
 
-# STILL TO-DO:
-def rpi2research(initial_angle, final_angle,
-				final_bits, final_rows, final_cols):
+def rpi2research(initial_angle=160, final_angle=90,
+				final_bits=8, final_rows=224, final_cols=224):
 	"""
 	Inputs:
 		initial_angle	:	Float. Viewing angle of input_image.
@@ -179,8 +178,10 @@ def rpi2research(initial_angle, final_angle,
 	# defines a vehicle to take and record pictures 10 times per second
 	V = Vehicle()
 
-	#add a camera part
-	cam = PiCamera()
+	#add a camera part 
+	#cam = PiCamera()
+	cam = vid2research(0)
+
 	V.add(cam, outputs=['image'], threaded=True)
 
 	#add tub part to record images
@@ -192,21 +193,18 @@ def rpi2research(initial_angle, final_angle,
 	#start the drive loop at 10 Hz
 	V.start(rate_hz=10)
 
-	# Display the pretty input from the Raspberry Pi's camera
-	### YOUR CODE HERE ###
-
-	# Display the converted video. The conversion should be done in real-time.
-	# Save the converted frames as you go if you'd like.
-	### YOUR CODE HERE ###
-
 
 ##################
 ##### SCRIPT #####
 ##################
 
-media_path = 'sample_pi_media'
-media_name = 'sample_pi_camera_video'
-vid2research(media_path + '/' + media_name + '.mp4')
+#media_path = 'sample_pi_media'
+#media_name = 'sample_pi_camera_video'
+#vid2research(media_path + '/' + media_name + '.mp4')
+
+#vid2research(0)
+
+rpi2research()
 
 '''
 # for image transformation testing
